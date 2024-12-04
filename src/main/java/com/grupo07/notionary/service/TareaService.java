@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface TareaService {
     public List<Tarea> findAll();
+    public List<Tarea> findAllByUsuarioId(int usuarioId);
 }

@@ -1,5 +1,6 @@
 package com.grupo07.notionary.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -22,4 +23,9 @@ public class Tarea {
 
     @Column(name = "descripcion", length = 400)
     private String descripcion;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    @JsonIgnore
+    private Usuario usuario;
 }

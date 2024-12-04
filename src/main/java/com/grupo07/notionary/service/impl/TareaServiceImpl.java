@@ -31,4 +31,16 @@ public class TareaServiceImpl implements TareaService {
             throw new GeneralException("xd");
         }
     }
+
+    @Override
+    public List<Tarea> findAllByUsuarioId(int usuarioId) {
+        try {
+            List<Tarea> registros = repository.findAllByUsuario_Id(usuarioId);
+            return registros;
+        } catch (ValidateException | NoDataFoundException e) {
+            throw e;
+        } catch (GeneralException e) {
+            throw new GeneralException("Error del servidor");
+        }
+    }
 }

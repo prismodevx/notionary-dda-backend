@@ -2,6 +2,7 @@ package com.grupo07.notionary.converter;
 
 import com.grupo07.notionary.dto.TareaDto;
 import com.grupo07.notionary.entity.Tarea;
+import com.grupo07.notionary.entity.Usuario;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,6 +15,8 @@ public class TareaConverter extends AbstractConverter<Tarea, TareaDto> {
                 .id(entity.getId())
                 .titulo(entity.getTitulo())
                 .descripcion(entity.getDescripcion())
+                .usuarioId(entity.getUsuario() != null ? entity.getUsuario().getId() : null)
+                .usuarioNombre(entity.getUsuario() != null ? entity.getUsuario().getUsuario() : null)
                 .build();
     }
 
@@ -21,10 +24,15 @@ public class TareaConverter extends AbstractConverter<Tarea, TareaDto> {
     public Tarea fromDto(TareaDto dto) {
         if(dto == null) return null;
 
-        return Tarea.builder()
+        Tarea tarea = Tarea.builder()
                 .id(dto.getId())
                 .titulo(dto.getTitulo())
                 .descripcion(dto.getDescripcion())
                 .build();
+
+        Usuario usuario = Usuario.builder().id(dto.getUsuarioId()).build();
+        tarea.setUsuario(usuario);
+
+        return tarea;
     }
 }

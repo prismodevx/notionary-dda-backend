@@ -6,5 +6,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface UsuarioService {
     boolean existsByUsuario(String username);
+    public Usuario findById(int id);
     void save(Usuario usuario);
 }

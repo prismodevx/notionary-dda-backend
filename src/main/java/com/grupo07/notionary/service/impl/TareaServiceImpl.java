@@ -1,9 +1,11 @@
 package com.grupo07.notionary.service.impl;
 
+import com.grupo07.notionary.entity.Categoria;
 import com.grupo07.notionary.entity.Tarea;
 import com.grupo07.notionary.exception.GeneralException;
 import com.grupo07.notionary.exception.NoDataFoundException;
 import com.grupo07.notionary.exception.ValidateException;
+import com.grupo07.notionary.repository.CategoriaRepository;
 import com.grupo07.notionary.repository.TareaRepository;
 import com.grupo07.notionary.service.TareaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,10 @@ import java.util.Optional;
 public class TareaServiceImpl implements TareaService {
     @Autowired
     private TareaRepository repository;
+
+    @Autowired
+    private CategoriaRepository categoriaRepository;
+
 
     @Override
     @Transactional(readOnly = true)
@@ -34,6 +40,7 @@ public class TareaServiceImpl implements TareaService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Tarea> findAllByUsuarioUsuario(String username) {
         try {
             List<Tarea> registros = repository.findAllByUsuario_UsuarioAndActivoTrue(username);
@@ -68,10 +75,15 @@ public class TareaServiceImpl implements TareaService {
                 return nuevo;
             }
 
+            Categoria categoria = categoriaRepository.findById((long) tarea.getCategoria().getId())
+                    .orElseThrow(() -> new NoDataFoundException("No existe una categoría con ese id"));
+            tarea.setCategoria(categoria);
+
             Tarea registro = repository.findById(tarea.getId())
                     .orElseThrow(() -> new NoDataFoundException("No existe un registro con ese id"));
             registro.setTitulo(tarea.getTitulo());
             registro.setDescripcion(tarea.getDescripcion());
+            registro.setCategoria(categoria);
             repository.save(registro);
 
             return registro;

@@ -8,7 +8,7 @@ import java.util.List;
 public interface CategoriaService {
     public List<Categoria> findAll();
     public List<Categoria> findAllByUsuarioUsuario(String usuario);
-    public Categoria findById(int id);
+    public Categoria findById(long id);
     public Categoria save(Categoria categoria);
-    public Categoria deactivate(int id);
+    public Categoria deactivate(long id);
 }

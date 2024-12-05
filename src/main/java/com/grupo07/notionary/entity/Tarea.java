@@ -28,6 +28,11 @@ public class Tarea {
     private boolean activo;
 
     @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    @JsonIgnore
+    private Categoria categoria;
+
+    @ManyToOne
     @JoinColumn(name = "usuario_id")
     @JsonIgnore
     private Usuario usuario;

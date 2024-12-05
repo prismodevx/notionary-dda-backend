@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface TareaRepository extends JpaRepository<Tarea, Integer> {
-    List<Tarea> findAllByUsuario_Usuario(String username);
+    List<Tarea> findAllByUsuario_UsuarioAndActivoTrue(String username);
 }

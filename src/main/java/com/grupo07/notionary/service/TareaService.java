@@ -10,4 +10,5 @@ public interface TareaService {
     public List<Tarea> findAllByUsuarioUsuario(String usuario);
     public Tarea findById(int id);
     public Tarea save(Tarea tarea);
+    public Tarea deactivate(int id);
 }

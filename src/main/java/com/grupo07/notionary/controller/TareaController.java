@@ -57,6 +57,12 @@ public class TareaController {
         return new WrapperResponse(true, "success", dto).createResponse(HttpStatus.OK);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<TareaDto> deactivate(@PathVariable("id") int id) {
+        TareaDto dto = converter.fromEntity(service.deactivate(id));
+        return new WrapperResponse(true, "success", dto).createResponse(HttpStatus.OK);
+    }
+
     @PutMapping("/{usuario}")
     public ResponseEntity<TareaDto> update(@PathVariable("usuario") String usuario, @RequestBody TareaDto registro) {
         Tarea entity = converter.fromDto(registro);

@@ -11,18 +11,15 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name = "tareas")
+@Table(name = "categorias")
 @EntityListeners(AuditingEntityListener.class)
-public class Tarea {
+public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "titulo", length = 200, nullable = false)
-    private String titulo;
-
-    @Column(name = "descripcion", length = 400)
-    private String descripcion;
+    @Column(name = "nombre", length = 200, nullable = false)
+    private String nombre;
 
     @Column(name = "activo")
     private boolean activo;

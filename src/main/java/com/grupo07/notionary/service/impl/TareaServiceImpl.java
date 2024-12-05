@@ -36,7 +36,7 @@ public class TareaServiceImpl implements TareaService {
     @Override
     public List<Tarea> findAllByUsuarioUsuario(String username) {
         try {
-            List<Tarea> registros = repository.findAllByUsuario_Usuario(username);
+            List<Tarea> registros = repository.findAllByUsuario_UsuarioAndActivoTrue(username);
             return registros;
         } catch (ValidateException | NoDataFoundException e) {
             throw e;
@@ -63,6 +63,7 @@ public class TareaServiceImpl implements TareaService {
     public Tarea save(Tarea tarea) {
         try {
             if(tarea.getId() == 0) {
+                tarea.setActivo(true);
                 Tarea nuevo = repository.save(tarea);
                 return nuevo;
             }
@@ -73,6 +74,21 @@ public class TareaServiceImpl implements TareaService {
             registro.setDescripcion(tarea.getDescripcion());
             repository.save(registro);
 
+            return registro;
+        } catch (ValidateException | NoDataFoundException e) {
+            throw e;
+        } catch (GeneralException e) {
+            throw new GeneralException("Error del servidor");
+        }
+    }
+
+    @Override
+    public Tarea deactivate(int id) {
+        try {
+            Tarea registro = repository.findById(id)
+                    .orElseThrow(() -> new NoDataFoundException("No existe un registro con ese ID"));
+            registro.setActivo(false);
+            repository.save(registro);
             return registro;
         } catch (ValidateException | NoDataFoundException e) {
             throw e;

@@ -7,6 +7,7 @@ import com.grupo07.notionary.service.PdfService;
 import com.grupo07.notionary.service.TareaService;
 import com.grupo07.notionary.util.WrapperResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
+@EnableJpaAuditing
 @RequestMapping("/api/v1/tareas")
 public class TareaController {
     @Autowired
@@ -78,16 +80,12 @@ public class TareaController {
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String fechaHora = fecha.format(formato);
 
-        // crear el contexto de Thymeleaf con los datos
         Context context = new Context();
         context.setVariable("registros", tareas);
         context.setVariable("fecha", fechaHora);
 
-        // Llamar al servicio PdfService para generar el PDF
         byte[] pdfBytes = pdfService.createPdf("tareasReporte", context);
 
-        // Configurar los encabezados de la respuesta HTTP para devolver el PDF
-        // import org.springframework.http.HttpHeaders;
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
         headers.setContentDispositionFormData("inline", "reporte_tareas.pdf");

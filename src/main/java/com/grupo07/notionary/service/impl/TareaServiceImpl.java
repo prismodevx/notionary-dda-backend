@@ -43,7 +43,7 @@ public class TareaServiceImpl implements TareaService {
     @Transactional(readOnly = true)
     public List<Tarea> findAllByUsuarioUsuario(String username) {
         try {
-            List<Tarea> registros = repository.findAllByUsuario_UsuarioAndActivoTrue(username);
+            List<Tarea> registros = repository.findAllByUsuario_UsuarioAndActivoTrueOrderByCreatedAtDesc(username);
             return registros;
         } catch (ValidateException | NoDataFoundException e) {
             throw e;
@@ -83,6 +83,7 @@ public class TareaServiceImpl implements TareaService {
                     .orElseThrow(() -> new NoDataFoundException("No existe un registro con ese id"));
             registro.setTitulo(tarea.getTitulo());
             registro.setDescripcion(tarea.getDescripcion());
+            registro.setEstado(tarea.getEstado());
             registro.setCategoria(categoria);
             repository.save(registro);
 

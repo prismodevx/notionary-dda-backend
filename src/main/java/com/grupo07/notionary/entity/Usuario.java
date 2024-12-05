@@ -22,6 +22,8 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String usuario;
+    private String email;
+    private String nombres;
     private String password;
     private boolean activo;
 

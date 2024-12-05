@@ -65,6 +65,8 @@ public class AuthServiceImpl implements AuthService {
     private Usuario createUser(SignUpRequestDto signUpRequestDto) throws RoleNotFoundException {
         return Usuario.builder()
                 .usuario(signUpRequestDto.getUsuario())
+                .email(signUpRequestDto.getEmail())
+                .nombres(signUpRequestDto.getNombres())
                 .password(passwordEncoder.encode(signUpRequestDto.getPassword()))
                 .activo(true)
                 .roles(determineRoles(signUpRequestDto.getRoles()))

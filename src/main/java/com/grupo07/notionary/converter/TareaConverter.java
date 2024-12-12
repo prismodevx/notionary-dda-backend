@@ -21,6 +21,7 @@ public class TareaConverter extends AbstractConverter<Tarea, TareaDto> {
                 .usuarioId(entity.getUsuario() != null ? entity.getUsuario().getId() : null)
                 .usuarioNombre(entity.getUsuario() != null ? entity.getUsuario().getUsuario() : null)
                 .estado(entity.getEstado())
+                .duracion(entity.getDuracion())
                 .build();
     }
 
@@ -33,6 +34,7 @@ public class TareaConverter extends AbstractConverter<Tarea, TareaDto> {
                 .titulo(dto.getTitulo())
                 .descripcion(dto.getDescripcion())
                 .estado(dto.getEstado())
+                .duracion(dto.getDuracion())
                 .build();
 
         Categoria categoria = Categoria.builder().id((int) dto.getCategoriaId()).build();

@@ -85,6 +85,7 @@ public class TareaServiceImpl implements TareaService {
             registro.setDescripcion(tarea.getDescripcion());
             registro.setEstado(tarea.getEstado());
             registro.setCategoria(categoria);
+            registro.setDuracion(tarea.getDuracion());
             repository.save(registro);
 
             return registro;

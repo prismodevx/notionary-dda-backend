@@ -30,6 +30,10 @@ public class Tarea {
     @Column(name = "activo")
     private boolean activo;
 
+    @Column(name = "duracion")
+    private int duracion;
+
+
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     @JsonIgnore

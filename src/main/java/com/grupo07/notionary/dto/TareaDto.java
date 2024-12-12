@@ -17,4 +17,5 @@ public class TareaDto {
     private long usuarioId;
     private String usuarioNombre;
     private String estado;
+    private int duracion;
 }

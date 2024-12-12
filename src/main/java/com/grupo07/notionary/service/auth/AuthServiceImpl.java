@@ -49,7 +49,7 @@ public class AuthServiceImpl implements AuthService {
     public ResponseEntity<ApiResponseDto<?>> signUpUser(SignUpRequestDto signUpRequestDto)
             throws UserAlreadyExistsException, RoleNotFoundException {
         if (usuarioService.existsByUsuario(signUpRequestDto.getUsuario())) {
-            throw new UserAlreadyExistsException("Registration Failed: Provided username already exists. Try sign in or provide another username.");
+            throw new UserAlreadyExistsException("Error en el registro: el nombre de usuario proporcionado ya existe. Intente iniciar sesión o proporcione otro nombre de usuario.");
         }
 
         Usuario user = createUser(signUpRequestDto);

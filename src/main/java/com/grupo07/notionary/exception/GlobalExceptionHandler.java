@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
                 .body(
                         ApiResponseDto.builder()
                                 .isSuccess(false)
-                                .message("Registration Failed: Please provide valid data.")
+                                .message("Registro fallido, te falto algun campo.")
                                 .response(errorMessage)
                                 .build()
                 );
